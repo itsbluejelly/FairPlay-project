@@ -34,17 +34,22 @@ abstract contract Ownable is Context, IOwnable{
     }
 
     // A function to get the current owner
-    function getOwner() external view returns(address){
+    function getOwner() external virtual view returns(address){
         return _owner;
     }
 
     // A function to transfer ownership to a valid address
-    function transferOwnership(address _newOwner) external onlyValidAddress(_newOwner) onlyOwner{
+    function transferOwnership(address _newOwner) 
+        public  
+        virtual 
+        onlyValidAddress(_newOwner) 
+        onlyOwner
+    {
         _transferOwnership(_newOwner);
     }
 
     // A function to renounce ownership
-    function renounceOwnership() external onlyOwner{
+    function renounceOwnership() public virtual onlyOwner{
         _transferOwnership(address(0));
     }
 

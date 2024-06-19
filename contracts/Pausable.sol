@@ -7,7 +7,7 @@ import "interfaces/IPausable.sol";
     // IMPORTING CONTRACTS
 import "@openzeppelin/contracts/utils/Context.sol";
 
-contract Pausable is IPausable, Context{
+abstract contract Pausable is IPausable, Context{
     // A variable to hold the pause state
     bool private _paused;
 
@@ -34,17 +34,17 @@ contract Pausable is IPausable, Context{
     }
 
     // A function to pause a contract, only when unpaused
-    function pause() external onlyWhenUnpaused{
+    function pause() public virtual onlyWhenUnpaused{
         _pause();
     }
 
     // A function to unpause a contract, only when paused
-    function unpause() external onlyWhenPaused{
+    function unpause() public virtual onlyWhenPaused{
         _unpause();
     }
 
     // A function to return the current pause status
-    function isPaused() public view returns(bool){
+    function isPaused() public virtual view returns(bool){
         return _paused;
     }
 
